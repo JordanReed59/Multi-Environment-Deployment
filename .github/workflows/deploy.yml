@@ -44,7 +44,6 @@ jobs:
             exit 1
           fi
 
-      steps:
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v1
         with:
