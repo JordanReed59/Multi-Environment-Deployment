@@ -45,7 +45,6 @@ jobs:
           fi
 
       steps:
-
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -53,11 +52,11 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           role-session-name: GitHub-OIDC-TERRAFORM
 
-    - name: Print GitHub Token Values
-      run: |
-        echo "GitHub Actions Token: $GITHUB_TOKEN"
-        echo "GitHub Actions Token Audience (aud): $GITHUB_TOKEN_ACTIONS_AWS_COM_AUD"
-        echo "GitHub Actions Token Subject (sub): $GITHUB_TOKEN_ACTIONS_AWS_COM_SUB"
+      - name: Print GitHub Token Values
+        run: |
+          echo "GitHub Actions Token: $GITHUB_TOKEN"
+          echo "GitHub Actions Token Audience (aud): $GITHUB_TOKEN_ACTIONS_AWS_COM_AUD"
+          echo "GitHub Actions Token Subject (sub): $GITHUB_TOKEN_ACTIONS_AWS_COM_SUB"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
