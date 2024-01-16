@@ -13,7 +13,7 @@ env:
   TF_LOG: INFO
   AWS_REGION: ${{ secrets.AWS_REGION }}
   AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
-  AWS_BUCKET_NAME_KEY: ${{ secrets.AWS_BUCKET_KEY_NAME }}
+  AWS_BUCKET_KEY_NAME: ${{ secrets.AWS_BUCKET_KEY_NAME }}
   GITHUB_BRANCH_NAME: ${{ github.ref_name }}
 
 jobs:
