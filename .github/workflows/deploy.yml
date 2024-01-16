@@ -55,9 +55,9 @@ jobs:
         run: |
           aws sts get-caller-identity
 
-      - name: Debug AWS CLI
-        run: |
-          aws sts assume-role --role-arn arn:aws:iam::590183831246:role/github-actions-tf-mgmt-role --role-session-name test-session
+      # - name: Debug AWS CLI
+      #   run: |
+      #     aws sts assume-role --role-arn arn:aws:iam::590183831246:role/github-actions-tf-mgmt-role --role-session-name test-session
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
