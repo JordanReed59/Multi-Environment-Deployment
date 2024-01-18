@@ -84,10 +84,8 @@ jobs:
         env:
           GITHUB_BRANCH_NAME: ${{ github.ref_name }}
         run: |
-          # cd ../../.github/workflows/utils
           chmod +x ../../.github/workflows/utils/workspaces.sh
           source ../../.github/workflows/utils/workspaces.sh $GITHUB_BRANCH_NAME
-          # terraform workspace new $BRANCH_NAME
 
       - name: Terraform Validate
         id: validate
