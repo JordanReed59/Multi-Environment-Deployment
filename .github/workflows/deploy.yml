@@ -62,8 +62,7 @@ jobs:
           # Assume the role in Account B for terraform init
           aws sts assume-role \
             --role-arn arn:aws:iam::590183831246:role/github-actions-tf-mgmt-role \
-            --role-session-name GitHubActionsInit \
-
+            --role-session-name GitHubActionsInit
           aws s3 ls
 
       - name: Debug AWS CLI Configuration (Account B)
