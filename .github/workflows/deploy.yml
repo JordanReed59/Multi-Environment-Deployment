@@ -15,6 +15,7 @@ env:
   AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
   AWS_BUCKET_KEY_NAME: ${{ secrets.AWS_BUCKET_KEY_NAME }}
   GITHUB_BRANCH_NAME: ${{ github.ref_name }}
+  AWS_TF_ROLE: ${{ secrets.AWS_TF_ROLE }}
 
 jobs:
   plan:
@@ -55,26 +56,31 @@ jobs:
         run: |
           aws sts get-caller-identity
 
-      # - name: Debug AWS CLI
-      #   run: |
-      #     aws sts assume-role --role-arn arn:aws:iam::590183831246:role/github-actions-tf-mgmt-role --role-session-name test-session
+      - name: Assume role in Account B for terraform init
+        run: |
+          # Assume the role in Account B for terraform init
+          aws sts assume-role \
+            --role-arn ${AWS_TF_ROLE} \
+            --role-session-name GitHubActionsInit
+
+      - name: Debug AWS CLI Configuration (Account B)
+        run: |
+          aws configure list
+          aws sts get-caller-identity
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.2.5
 
-      - name: Terraform fmt
-        id: fmt
-        run: terraform fmt -check
-        continue-on-error: true
+      # - name: Terraform fmt
+      #   id: fmt
+      #   run: terraform fmt -check
+      #   continue-on-error: true
 
-      - name: Terraform Init
-        id: init
-        # env:
-        #   AWS_BUCKET_NAME: ${{ env.AWS_BUCKET_NAME }}
-        #   AWS_BUCKET_KEY_NAME: ${{ env.AWS_BUCKET_KEY_NAME }}
-        run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${AWS_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}" -backend-config="workspace_key_prefix=${REPO_NAME}"
+      # - name: Terraform Init
+      #   id: init
+      #   run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${AWS_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}" -backend-config="workspace_key_prefix=${REPO_NAME}"
 
       # - name: Terraform Workspaces
       #   id: workspaces
