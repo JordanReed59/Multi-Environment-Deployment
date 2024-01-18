@@ -54,7 +54,6 @@ jobs:
 
       - name: Debug AWS CLI
         run: |
-          aws sts get-caller-identity
           aws s3 ls
 
       - name: Assume role in Account B for terraform init
