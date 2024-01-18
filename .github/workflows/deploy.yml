@@ -71,7 +71,7 @@ jobs:
           # Assume the role in Account B for terraform init
           assume_role_output=$(aws sts assume-role \
             --role-arn arn:aws:iam::590183831246:role/github-actions-tf-mgmt-role \
-            --role-session-name GitHubActionsInit
+            --role-session-name GitHubActionsInit)
 
           export AWS_ACCESS_KEY_ID=$(echo $assume_role_output | jq -r .Credentials.AccessKeyId)
           export AWS_SECRET_ACCESS_KEY=$(echo $assume_role_output | jq -r .Credentials.SecretAccessKey)
