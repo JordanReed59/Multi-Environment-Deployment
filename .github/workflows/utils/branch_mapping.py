@@ -21,4 +21,4 @@ def map_branch_name(branch_name):
         exit(1)
         
 workspace_name = map_branch_name(sys.argv[1])
-print(f"Workspace nameworkspace_name: {workspace_name}")
+print(workspace_name)

@@ -11,20 +11,20 @@ echo $workspace_list
 found=false
 
 echo "Branch name: $BRANCH_NAME"
-export workspace_name=$(python ../../.github/workflows/utils/branch_mapping.py "$BRANCH_NAME")
+export WORKSPACE_NAME=$(python ../../.github/workflows/utils/branch_mapping.py "$BRANCH_NAME")
 
 for item in "${workspace_list[@]}"; do
-    if [[ "$item" == $workspace_name ]]; then
+    if [[ "$item" == $WORKSPACE_NAME ]]; then
         found=true
         break
     fi
 done
 
 if [ "$found" = true ]; then
-    terraform workspace select $workspace_name
-    echo "Switching to workspace '$workspace_name'."
+    echo "Switching to workspace '$WORKSPACE_NAME'."
+    terraform workspace select $WORKSPACE_NAME
 else
-    echo "Creating and switching to workspace '$workspace_name'."
-    terraform workspace new $workspace_name
+    echo "Creating and switching to workspace '$WORKSPACE_NAME'."
+    terraform workspace new $WORKSPACE_NAME
 fi
 terraform workspace list
