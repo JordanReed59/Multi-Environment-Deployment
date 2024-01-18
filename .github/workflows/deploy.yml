@@ -82,6 +82,7 @@ jobs:
       - name: Terraform Workspaces
         id: workspaces
         run: |
+          aws sts get-caller-identity
           chmod +x ../../.github/workflows/utils/workspaces.sh
           source ../../.github/workflows/utils/workspaces.sh $GITHUB_BRANCH_NAME
 
