@@ -2,7 +2,9 @@ import re
 import sys
 
 def map_branch_name(branch_name):
-    if branch_name == "main":
+    if branch_name[0] == "v":
+        return "prod"
+    elif branch_name == "main":
         return "qa"
     
     elif branch_name == "develop":
