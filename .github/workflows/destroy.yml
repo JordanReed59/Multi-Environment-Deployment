@@ -24,6 +24,18 @@ jobs:
       - name: Git checkout
         uses: actions/checkout@v3
 
+      - name: Debug
+        run: |
+          if [[ $GITHUB_REF == refs/heads/v* ]]; then
+            echo "Full ref"
+            echo "AWS_ROLE=***" >> $GITHUB_ENV
+
+          elif [[ $GITHUB_REF == v* ]]; then
+            echo "Partial ref"
+            echo "AWS_ROLE=***" >> $GITHUB_ENV
+          else
+            echo "Neither working"
+
       - name: Set ENV variables
         run: |
           echo "REPO_NAME=${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}" >> $GITHUB_ENV
