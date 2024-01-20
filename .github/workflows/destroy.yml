@@ -26,14 +26,11 @@ jobs:
 
       - name: Debug
         run: |
-          if [[ $GITHUB_REF == refs/heads/v* ]]; then
+          if [[ $GITHUB_REF == refs/tags/v* ]]; then
             echo "Full ref"
             echo "AWS_ROLE=***" >> $GITHUB_ENV
-          elif [[ $GITHUB_REF == v* ]]; then
-            echo "Partial ref"
-            echo "AWS_ROLE=***" >> $GITHUB_ENV
           else
-            echo "Neither working"
+            echo "Not working"
           fi
 
       - name: Set ENV variables
