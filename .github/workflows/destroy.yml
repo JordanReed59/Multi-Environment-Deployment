@@ -27,7 +27,10 @@ jobs:
       - name: Set ENV variables
         run: |
           echo "REPO_NAME=${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}" >> $GITHUB_ENV
-          if [[ $GITHUB_REF == refs/heads/main ]]; then
+          if [[ $GITHUB_REF == refs/heads/v* ]]; then
+            echo "Using PROD Role"
+            echo "AWS_ROLE=${{ secrets.AWS_PROD_ROLE }}" >> $GITHUB_ENV
+          elif [[ $GITHUB_REF == refs/heads/main ]]; then
             echo "Using QA Role"
             echo "AWS_ROLE=${{ secrets.AWS_QA_ROLE }}" >> $GITHUB_ENV
           elif [[ $GITHUB_REF == refs/heads/develop ]]; then
