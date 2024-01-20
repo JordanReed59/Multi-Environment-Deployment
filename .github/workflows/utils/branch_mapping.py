@@ -4,6 +4,7 @@ import sys
 def map_branch_name(branch_name):
     if branch_name[0] == "v":
         return "prod"
+    
     elif branch_name == "main":
         return "qa"
     
