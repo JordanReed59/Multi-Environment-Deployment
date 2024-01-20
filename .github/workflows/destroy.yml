@@ -29,12 +29,12 @@ jobs:
           if [[ $GITHUB_REF == refs/heads/v* ]]; then
             echo "Full ref"
             echo "AWS_ROLE=***" >> $GITHUB_ENV
-
           elif [[ $GITHUB_REF == v* ]]; then
             echo "Partial ref"
             echo "AWS_ROLE=***" >> $GITHUB_ENV
           else
             echo "Neither working"
+          fi
 
       - name: Set ENV variables
         run: |
