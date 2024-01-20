@@ -65,9 +65,9 @@ jobs:
           chmod +x ../../.github/workflows/utils/workspaces.sh
           source ../../.github/workflows/utils/workspaces.sh $GITHUB_BRANCH_NAME
 
-      # - name: Terraform Validate
-      #   id: validate
-      #   run: terraform validate -no-color
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
 
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve -input=false
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false
