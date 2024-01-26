@@ -1,8 +1,15 @@
 import re
 import sys
 
+'''
+Function determines which tf workspace name to use based on the branch name.
+If branch name doesn't fall into the naming structure than pipeline fails and error message is deplayed
+'''
 def map_branch_name(branch_name):
-    if branch_name == "main":
+    if branch_name[0] == "v":
+        return "prod"
+    
+    elif branch_name == "main":
         return "qa"
     
     elif branch_name == "develop":
@@ -14,8 +21,7 @@ def map_branch_name(branch_name):
         i.e. feature/test (branch name) -> f-test (workspace name)
         """
         return f"{branch_name[0]}-{branch_name.split('/')[1]}" 
-        
-    
+
     else:
         print("There is no mapping for this branch name format, please try again")
         exit(1)
