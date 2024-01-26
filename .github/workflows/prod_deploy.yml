@@ -1,8 +1,5 @@
 name: "Terraform Prod Deploy"
 on:
-  push: #could rm push section
-    branches-ignore:    
-      - '**'
   create:
     tags:
       - '*'
